@@ -22,10 +22,6 @@ function runParallel(jobs, parallelNum, timeout = 1000) {
         return Promise.resolve();
     }
 
-    if (jobs.length === 0) {
-        return Promise.resolve();
-    }
-
     const results = [];
     let lastBatchId = 0;
 
