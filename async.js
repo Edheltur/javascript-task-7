@@ -18,7 +18,10 @@ function withTimeout(job, timeout) {
  * @returns {Promise<Array>}
  */
 function runParallel(jobs, parallelNum, timeout = 1000) {
-    let results = [];
+    if (parallelNum <= 0) {
+        return Promise.resolve();
+    }
+    const results = [];
     let lastBatchId = 0;
 
     function executeBatch(batchJobs) {
@@ -36,7 +39,7 @@ function runParallel(jobs, parallelNum, timeout = 1000) {
         });
     }
 
-    let batches = [];
+    const batches = [];
     while (parallelNum-- > 0 && jobs.length > 0) {
         batches.push(executeBatch(jobs));
     }
